@@ -57,6 +57,7 @@ type CheckResponseType struct {
 	Name string                    `json:"-"`
 	HTTP *CheckResponseHTTPDetails `json:"http,omitempty"`
 	TCP  *CheckResponseTCPDetails  `json:"tcp,omitempty"`
+	SMTP *CheckResponseSMTPDetails `json:"smtp,omitempty"`
 }
 
 // CheckResponseTag is an optional tag that can be added to checks.
@@ -206,6 +207,7 @@ func (c *CheckResponseType) UnmarshalJSON(b []byte) error {
 		}
 		c.HTTP = rawCheckDetails.HTTP
 		c.TCP = rawCheckDetails.TCP
+		c.SMTP = rawCheckDetails.SMTP
 	}
 	return nil
 }
@@ -228,6 +230,14 @@ type CheckResponseTCPDetails struct {
 	Port           int    `json:"port,omitempty"`
 	StringToSend   string `json:"stringtosend,omitempty"`
 	StringToExpect string `json:"stringtoexpect,omitempty"`
+}
+
+// CheckResponseSMTPDetails represents the details specific to SMTP checks.
+type CheckResponseSMTPDetails struct {
+	Port           int    `json:"port,omitempty"`
+	Auth           string `json:"auth,omitempty"`
+	StringToExpect string `json:"stringtoexpect,omitempty"`
+	Encryption     bool   `json:"encryption,omitempty"`
 }
 
 // Return string representation of the PingdomError.
