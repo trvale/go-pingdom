@@ -344,7 +344,7 @@ func (ck *SMTPCheck) PutParams() map[string]string {
 		"userids":          intListToCDString(ck.UserIds),
 		"teamids":          intListToCDString(ck.TeamIds),
 		"port":             strconv.Itoa(ck.Port),
-		"auth":             strconv.Itoa(ck.Auth),
+		"auth":             ck.Auth,
 		"encryption":       strconv.FormatBool(ck.Encryption),
 	}
 
